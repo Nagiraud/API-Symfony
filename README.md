@@ -6,6 +6,11 @@ composer install
 
 ## Pour lancer le projet:
 
+Créer le .env.local en dupliquant le .env, et décommentez cette ligne :
+```
+DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
+```
+
 Créer la base:
 
 ```
