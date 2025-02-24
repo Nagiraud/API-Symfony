@@ -1,4 +1,8 @@
 # API-Symfony
+## Installer les dépendances :
+```
+composer install
+```
 
 ## Pour lancer le projet:
 
