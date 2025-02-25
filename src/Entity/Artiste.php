@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ArtisteRepository;
+Elyo
 use Doctrine\DBAL\Types\Types;
+master
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArtisteRepository::class)]
@@ -15,6 +17,7 @@ class Artiste
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+ Elyo
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
@@ -22,12 +25,15 @@ class Artiste
 
     #[ORM\Column(type: Types::BLOB)]
     private $image = null;
+    private ?string $Name = null;
+ master
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+Elyo
     public function getNom(): ?string
     {
         return $this->nom;
@@ -60,6 +66,16 @@ class Artiste
     public function setImage($image): static
     {
         $this->image = $image;
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(string $Name): static
+    {
+        $this->Name = $Name;
+master
 
         return $this;
     }
