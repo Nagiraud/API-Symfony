@@ -14,7 +14,7 @@ class GreetingController extends AbstractController
     public function hello(): Response
     {
         return $this->render('greeting/hello.html.twig',[
-            "name"=>"Pat"
+            "name"=> $this->getUser()->getUserIdentifier()
         ]);
     }
 
