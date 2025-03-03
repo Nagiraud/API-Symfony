@@ -63,9 +63,5 @@ class GreetingController extends AbstractController
         return $this->render('movies/show.html.twig');
     }
 
-    #[Route('/api/artist', name: 'app_event_show', requirements: ['id' => '\d+'])]
-    public function showEvent(int $id,EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('movies/show.html.twig');
-    }
+
 }
