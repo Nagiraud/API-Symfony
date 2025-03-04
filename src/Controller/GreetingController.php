@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,10 +24,10 @@ class GreetingController extends AbstractController
     public function artist(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Artist::class);
-        $movies = $repository->findAll();
+        $artiste = $repository->findAll();
 
         return $this->render('greeting/artist.html.twig', [
-            'name' => $movies,
+            'artiste' => $artiste,
         ]);
     }
 
