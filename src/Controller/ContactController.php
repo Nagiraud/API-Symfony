@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Entity\Event;
 use App\Form\ArtistFormType;
+use App\Form\EventFormType;
 use App\Form\ModifyFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,6 +60,22 @@ final class ContactController extends AbstractController
         // Rendre la vue avec le formulaire
         return $this->render('artist/modify.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/form-event', name: 'app_form-event')]
+    public function event(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $event = new Event();
+        $form = $this->createForm(type: EventFormType::class, data: $event);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($event);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_event');
+        }
+        return $this->render('event/form-event.html.twig', [
+            'form' => $form,
         ]);
     }
 }

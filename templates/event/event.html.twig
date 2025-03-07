@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>ID :</strong> {{ artist.id }}<br>
+                <strong>Nom :</strong> {{ event.name }}<br>
+                <strong>Date :</strong> {{ event.date }}<br>
+                <strong>Artiste :</strong> {{ event.artist }}<br>
+                <a href="{{ path('app_delete_artist', {id: artist.id}) }}">Supprimer</a>
+                <a href="{{ path('app_modify_artist', {id: artist.id}) }}">Modifier</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}
