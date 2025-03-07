@@ -20,17 +20,6 @@ class GreetingController extends AbstractController
         ]);
     }
 
-    #[Route('/artist', name: 'app_artist')]
-    public function artist(EntityManagerInterface $entityManager): Response
-    {
-        $repository = $entityManager->getRepository(Artist::class);
-        $artiste = $repository->findAll();
-
-        return $this->render('greeting/artist.html.twig', [
-            'artiste' => $artiste,
-        ]);
-    }
-
     #[Route('/users', name: 'app_users')]
     public function users(EntityManagerInterface $entityManager): Response
     {
