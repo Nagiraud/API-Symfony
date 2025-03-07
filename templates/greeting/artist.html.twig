@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <p>test</p>
+    <ul>
+        {% for artiste in artiste %}
+            <li>{{ artiste.name }}</li>
+        {% else %}
+            <li>Aucun artiste trouvé</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
