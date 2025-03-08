@@ -12,21 +12,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class GreetingController extends AbstractController
 {
-    #[Route('/hello', name: 'app_hello')]
-    public function hello(): Response
-    {
-        return $this->render('greeting/hello.html.twig',[
-            "name"=>"Pat"
-        ]);
-    }
-
     #[Route('/users', name: 'app_users')]
     public function users(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Artist::class);
         $movies = $repository->findAll();
 
-        return $this->render('greeting/artist.html.twig', [
+        return $this->render('artist/artist.html.twig', [
             'name' => $movies,
         ]);
     }
@@ -43,7 +35,7 @@ class GreetingController extends AbstractController
         $repository = $entityManager->getRepository(Artist::class);
         $movies = $repository->findAll();
 
-        return $this->render('greeting/artist.html.twig', [
+        return $this->render('artist/artist.html.twig', [
             'name' => $movies,
         ]);
     }

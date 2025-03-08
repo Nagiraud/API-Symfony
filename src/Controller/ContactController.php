@@ -34,9 +34,9 @@ final class ContactController extends AbstractController
     #[Route('/artist/{{id}}/delete', name: 'app_delete_artist')]
     public function delete(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
-        $artist = $entityManager->getRepository(Artist::class)->find($id);
+        $artists = $entityManager->getRepository(Artist::class)->find($id);
 
-        $entityManager->remove($artist);
+        $entityManager->remove($artists);
         $entityManager->flush();
         return $this->redirectToRoute('app_artist');
     }
@@ -44,13 +44,13 @@ final class ContactController extends AbstractController
     #[Route('/artist/{{id}}/modify', name: 'app_modify_artist')]
     public function modify(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
-        $artist = $entityManager->getRepository(Artist::class)->find($id);
-        $form = $this->createForm( ModifyFormType::class, $artist);
+        $artists = $entityManager->getRepository(Artist::class)->find($id);
+        $form = $this->createForm( ModifyFormType::class, $artists);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Mettre à jour l'artiste en base de données
-            $entityManager->persist($artist);
+            $entityManager->persist($artists);
             $entityManager->flush();
 
             // Rediriger vers la liste des artistes après la modification
