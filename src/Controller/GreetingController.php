@@ -12,30 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class GreetingController extends AbstractController
 {
-    #[Route('/users', name: 'app_users')]
-    public function users(EntityManagerInterface $entityManager): Response
-    {
-        $repository = $entityManager->getRepository(Artist::class);
-        $movies = $repository->findAll();
-
-        return $this->render('artist/artist.html.twig', [
-            'name' => $movies,
-        ]);
-    }
-
-    #[Route('/users/{id}', name: 'app_users_show', requirements: ['id' => '\d+'])]
-    public function showUser(int $id,EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('movies/show.html.twig');
-    }
-
-
-    #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
-    public function showEvent(int $id,EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('movies/show.html.twig');
-    }
-
     #[Route('/api/artist', name: 'api_artist', methods: ['GET'])]
     public function getProducts(EntityManagerInterface $entityManager): JsonResponse
     {

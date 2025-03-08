@@ -10,8 +10,8 @@
                 <strong>Nom :</strong> {{ event.name }}<br>
                 <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
                 <strong>Artiste :</strong> {{ event.artist }}<br>
-                <a href="{{ path('app_delete2_event', {id: event.id}) }}">Supprimer</a>
-                <a href="{{ path('app_modify2_event', {id: event.id}) }}">Modifier</a>
+                <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
+                <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
             </li>
             <hr>
         {% endfor %}
