@@ -6,12 +6,8 @@
     <ul>
         {% for event in events %}
             <li>
-                <strong>ID :</strong> {{ event.id }}<br>
-                <strong>Nom :</strong> {{ event.name }}<br>
-                <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
+                <strong>Nom :</strong><a href="{{ path('app_show_event', {id: event.id}) }}" > {{ event.name }} </a><br>
                 <strong>Artiste :</strong> {{ event.artist }}<br>
-                <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
-                <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
             </li>
             <hr>
         {% endfor %}

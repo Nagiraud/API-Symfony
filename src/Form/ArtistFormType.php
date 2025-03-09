@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Artist;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +15,12 @@ class ArtistFormType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image')
-        ;
-    }
+            ->add('image',FileType::class, [
+                'label' => 'Image (JPG, PNG)',
+                'required' => false,
+                'mapped' => false,
+            ]);
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
