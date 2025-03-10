@@ -3,6 +3,12 @@
 ```
 composer install
 ```
+## Activer les extensions:
+Allez dans votre php.ini, et vérifié d'avoir décommentez ces lignes :
+```
+extension=pdo_sqlite
+extension=fileinfo
+```
 
 ## Pour lancer le projet:
 
