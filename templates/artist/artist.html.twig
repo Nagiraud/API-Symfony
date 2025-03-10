@@ -1,23 +1,13 @@
 {% extends "base.html.twig" %}
 
+
 {% block body %}
     <h1>Liste des artistes</h1>
-
     <ul>
         {% for artist in artists %}
-            <li>
-                <strong>ID :</strong> {{ artist.id }}<br>
-                <strong>Nom :</strong> {{ artist.name }}<br>
-                <strong>Description :</strong> {{ artist.description }}<br>
-                {% if artist.image %}
-                    <img src="{{ artist.image }}" alt="Image de {{ artist.name }}" style="max-width: 200px; height: auto;">
-                {% else %}
-                    <em>Aucune image disponible</em>
-                {% endif %}
-                <a href="{{ path('app_delete_artist', {id: artist.id}) }}">Supprimer</a>
-                <a href="{{ path('app_modify_artist', {id: artist.id}) }}">Modifier</a>
-            </li>
-            <hr>
+
+            <li><a href="{{ path('app_show_artist', {id: artist.id}) }}">{{ artist.name }}</a></li>
+
         {% endfor %}
     </ul>
 {% endblock %}

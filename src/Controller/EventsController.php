@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\EventFormType;
-use App\Form\Modify2FormType;
+use App\Form\ModifyEventFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +58,7 @@ class EventsController extends AbstractController
     public function modify(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
         $events = $entityManager->getRepository(Event::class)->find($id);
-        $form = $this->createForm( Modify2FormType::class, $events);
+        $form = $this->createForm( ModifyEventFormType::class, $events);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,6 +73,17 @@ class EventsController extends AbstractController
         // Rendre la vue avec le formulaire
         return $this->render('event/modify.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/event/{{id}}', name: 'app_show_event')]
+    public function info(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $event = $entityManager->getRepository(Event::class)->find($id);
+
+        // Rendre la vue avec le formulaire
+        return $this->render('event/individualEvent.html.twig', [
+            'event' => $event,
         ]);
     }
 }

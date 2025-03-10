@@ -12,6 +12,13 @@
         {% endblock %}
     </head>
     <body>
+    <header>
+        <ul>
+            <li><a href={{ path('app_artist') }}>Artistes</a></li>
+            <li><a href="{{ path('app_event') }}">Evenements</a></li>
+            <li><a href="user">Utilisateurs</a></li>
+        </ul>
+    </header>
         {% block body %}{% endblock %}
     </body>
 </html>

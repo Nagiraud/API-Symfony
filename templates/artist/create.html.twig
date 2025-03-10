@@ -1,10 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.image) }}
-    <button type="submit">Ajouter artiste</button>
+    <h1>Ajouter un artiste</h1>
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_widget(form) }}
+    <button class="btn">Ajouter</button>
     {{ form_end(form) }}
 {% endblock %}
