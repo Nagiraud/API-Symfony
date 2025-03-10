@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class GreetingController extends AbstractController
 {
+
     #[Route('/hello', name: 'app_hello')]
     public function hello(): Response
     {
@@ -19,6 +20,7 @@ class GreetingController extends AbstractController
             "name"=> $this->getUser() ? $this->getUser()->getUserIdentifier() : "user"
         ]);
     }
+
     #[Route('/api/artist', name: 'api_artist', methods: ['GET'])]
     public function getProducts(EntityManagerInterface $entityManager): JsonResponse
     {
