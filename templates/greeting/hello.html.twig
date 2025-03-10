@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="/logout">logout</a>
+    {% else %}
+        <a href="/login">login</a>
+        <a href="/register">register</a>
+    {% endif %}
+
+    <h1>Hello {{ name }}</h1>
+
+{% endblock %}
