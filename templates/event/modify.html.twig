@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.artist) }}
+    <button type="submit">Modifier l'évènement</button>
+    {{ form_end(form) }}
+{% endblock %}

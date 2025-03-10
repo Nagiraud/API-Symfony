@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>Nom :</strong><a href="{{ path('app_show_event', {id: event.id}) }}" > {{ event.name }} </a><br>
+                <strong>Artiste :</strong> {{ event.artist }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

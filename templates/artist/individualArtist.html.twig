@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Artiste : {{ artist.name }}</h1>
+
+    <strong>ID :</strong> {{ artist.id }}<br>
+    <strong>Description :</strong> {{ artist.description }}<br>
+    {% if artist.image %}
+        <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
+    {% endif %}
+
+    <a href="{{ path('app_delete_artist', {id: artist.id}) }}">Supprimer</a>
+    <a href="{{ path('app_modify_artist', {id: artist.id}) }}">Modifier</a>
+
+    </ul>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>évenement : {{ event.name }}</h1>
+
+    <strong>ID :</strong> {{ event.id }}<br>
+    <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
+    <strong>Artiste :</strong> {{ event.artist }}<br>
+    <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
+    <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
+
+{% endblock %}
