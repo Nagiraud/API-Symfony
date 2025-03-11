@@ -1,6 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+
+    <p>Pas dans la liste ?</p>
+    <p>Ajoutez le !</p>
+    <a href="{{ path('app_create_event') }}">Ajoutez un événement</a>
+
     <h1>Liste des événements</h1>
 
     <ul>

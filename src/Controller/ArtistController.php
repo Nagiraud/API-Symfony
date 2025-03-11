@@ -28,23 +28,6 @@ class ArtistController extends AbstractController
         ]);
     }
 
-
-    /*#[Route('/artist/create', name: 'app_create_artist')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $contact = new Artist();
-        $form = $this->createForm(type: ArtistFormType::class, data: $contact);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_artist');
-        }
-        return $this->render('artist/create.html.twig', [
-            'form' => $form,
-        ]);
-    }*/
-
     #[Route('/artist/{{id}}/delete', name: 'app_delete_artist')]
     public function delete(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
@@ -93,7 +76,7 @@ class ArtistController extends AbstractController
     }
 
 
-    #[Route("/artist/new", name:"artist_new")]
+    #[Route("/artist/create", name:"app_create_artist")]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $artist = new Artist();
@@ -109,14 +92,11 @@ class ArtistController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
-                try {
-                    $file->move(
-                        $this->getParameter('image_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // Handle exception if something happens during file uploads
-                }
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $newFilename
+                );
+                
 
                 $artist->setImage($newFilename);
             }

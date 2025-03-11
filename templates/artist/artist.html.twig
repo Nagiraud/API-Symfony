@@ -2,6 +2,10 @@
 
 
 {% block body %}
+    <p>Pas dans la liste ?</p>
+    <p>Ajoutez le !</p>
+    <a href="{{ path('app_create_artist') }}">Ajoutez un artiste</a>
+
     <h1>Liste des artistes</h1>
     <ul>
         {% for artist in artists %}
