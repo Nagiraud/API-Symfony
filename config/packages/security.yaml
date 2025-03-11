@@ -35,8 +35,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/profile, roles: ROLE_USER }
-        # - { path: ^/, roles: ROLE_ADMIN }
+        #Not connected
+        { path: ^/hello , roles:}
+        #admin restricted path
+        { path: ^/artist/new, roles: ROLE_ADMIN }
+        { path: ^/artist/{{id}}/modify, roles: ROLE_ADMIN}
+        { path: ^/artist/{{id}}/delete, roles: ROLE_ADMIN}
+        { path: ^/user, roles: ROLE_ADMIN}
+        #all user restricted path
+        { path: ^/, roles: ROLE_USER }
 
 
 when@test:
