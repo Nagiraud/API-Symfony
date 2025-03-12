@@ -40,7 +40,7 @@ class ArtistController extends AbstractController
     }
 
     #[Route('/artist/{{id}}/modify', name: 'app_modify_artist')]
-    public function modify(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function modify(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger,int $id): Response
     {
 
         $artists = $entityManager->getRepository(Artist::class)->find($id);
@@ -49,9 +49,22 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Mettre à jour l'artiste en base de données
-            $entityManager->persist($artists);
+            $file = $form->get('image')->getData();
 
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $newFilename
+                );
+
+                $artists->setImage($newFilename);
+            }
+
+            $entityManager->persist($artists);
             $entityManager->flush();
 
             // Rediriger vers la liste des artistes après la modification
@@ -77,7 +90,7 @@ class ArtistController extends AbstractController
 
 
     #[Route("/artist/create", name:"app_create_artist")]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function Create(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $artist = new Artist();
         $form = $this->createForm(ArtistFormType::class, $artist);

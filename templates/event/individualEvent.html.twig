@@ -5,7 +5,13 @@
 
     <strong>ID :</strong> {{ event.id }}<br>
     <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
-    <strong>Artiste :</strong> {{ event.artist }}<br>
+
+    {% if event.artist is not null %}
+        <strong>Artiste :</strong> <a href="{{ path('app_show_artist' , {id:event.artist.id}) }}">{{ event.artist.name }}</a><br>
+    {% else %}
+        <strong>Artiste :</strong> Pas encore d'artiste<br>
+    {% endif %}
+
     <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
     <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
 

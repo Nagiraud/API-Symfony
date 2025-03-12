@@ -9,6 +9,13 @@
         <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
     {% endif %}
 
+    <strong>Liste des événements :</strong>
+    <ul>
+        {% for event in artist.events %}
+            <li><a href="{{ path('app_show_event', {id:event.id}) }}">{{ event.name }}</a></li>
+        {% endfor %}
+    </ul>
+
     <a href="{{ path('app_delete_artist', {id: artist.id}) }}">Supprimer</a>
     <a href="{{ path('app_modify_artist', {id: artist.id}) }}">Modifier</a>
 

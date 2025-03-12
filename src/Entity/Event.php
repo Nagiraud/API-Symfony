@@ -20,8 +20,10 @@ class Event
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $artist = null;
+    //clé étrangére référant l'artiste concerné
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Artist $artist = null;
 
     public function getId(): ?int
     {
@@ -52,12 +54,12 @@ class Event
         return $this;
     }
 
-    public function getArtist(): ?int
+    public function getArtist(): ?Artist
     {
         return $this->artist;
     }
 
-    public function setArtist(?int $artist): static
+    public function setArtist(?Artist $artist): static
     {
         $this->artist = $artist;
 
