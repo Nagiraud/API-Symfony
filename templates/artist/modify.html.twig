@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_start(form) }}
         {{ form_widget(form) }}
        <button class="btn">Modifier artiste</button>
     {{ form_end(form) }}

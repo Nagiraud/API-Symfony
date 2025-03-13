@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,15 +14,19 @@ class Artist
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['artist'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['artist'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['artist'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 1024, nullable: true)]
+    #[Groups(['artist'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'artist')]

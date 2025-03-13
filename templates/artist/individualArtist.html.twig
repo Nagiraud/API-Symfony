@@ -8,7 +8,7 @@
     {% if artist.image %}
         <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
     {% endif %}
-
+    <br>
     <strong>Liste des événements :</strong>
     <ul>
         {% for event in artist.events %}
