@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -24,6 +25,10 @@ class Event
     #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Artist $artist = null;
+
+    //reférence les utilisateurs qui ont ajouté l'évent
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
+    private Collection $users;
 
     public function getId(): ?int
     {
@@ -64,5 +69,25 @@ class Event
         $this->artist = $artist;
 
         return $this;
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static{
+        $this->users->removeElement($user);
+        return $this;
+
     }
 }

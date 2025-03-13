@@ -86,4 +86,34 @@ class EventsController extends AbstractController
             'event' => $event,
         ]);
     }
+
+    #[Route('/event/{id}/subscribe', name: 'app_subscribe_event')]
+    public function register(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez étre connecté.');
+        }
+
+        $event->addUser($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_show_event', ['id' => $event->getId()]);
+    }
+
+    #[Route('/event/{id}/unsubscribe', name: 'app_unsubscribe_event')]
+    public function unregister(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez étre connecté.');
+        }
+
+        $event->removeUser($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_show_event', ['id' => $event->getId()]);
+    }
 }

@@ -5,10 +5,11 @@
 
     <strong>ID :</strong> {{ artist.id }}<br>
     <strong>Description :</strong> {{ artist.description }}<br>
+
     {% if artist.image %}
         <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
-    {% endif %}
-    <br>
+    {% endif %}<br>
+
     <strong>Liste des événements :</strong>
     <ul>
         {% for event in artist.events %}

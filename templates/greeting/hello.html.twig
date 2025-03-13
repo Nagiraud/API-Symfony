@@ -11,5 +11,20 @@
     {% endif %}
 
     <h1>Hello {{ name }}</h1>
+    <p>Liste d'évenemnt enregisté :</p>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+         {% for event in events %}
+              <ul>
+                  <a href="{{ path('app_show_event', {id:event.id}) }}">{{ event.name }}</a>
+              </ul>
+         {% else %}
+             <li>Pas d'événement enregisté.</li>
+
+         {% endfor %}
+
+    {% endif %}
+
+
+
 
 {% endblock %}

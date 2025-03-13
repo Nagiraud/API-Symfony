@@ -12,6 +12,13 @@
         <strong>Artiste :</strong> Pas encore d'artiste<br>
     {% endif %}
 
+    {% if app.user in event.users %}
+        <a href="{{ path('app_unsubscribe_event', {id: event.id}) }}">Unregister</a>
+    {% else %}
+        <a href="{{ path('app_subscribe_event', {id: event.id}) }}">Register</a>
+    {% endif %}
+    <br>
+
     <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
     <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
 
