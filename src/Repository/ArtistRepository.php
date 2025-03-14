@@ -40,4 +40,12 @@ class ArtistRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findByName(string $name):array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

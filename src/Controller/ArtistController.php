@@ -18,10 +18,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ArtistController extends AbstractController
 {
     #[Route('/artist', name: 'app_artist')]
-    public function movies(EntityManagerInterface $entityManager): Response
+    public function movies(Request $request,EntityManagerInterface $entityManager ): Response
     {
-        $repository = $entityManager->getRepository(Artist::class);
-        $artist = $repository->findAll();
+
+        $search = $request->query->get('search');
+
+        if ($search) {
+            $artist = $entityManager->getRepository(Artist::class)->findByName($search);
+        } else {
+            $artist = $entityManager->getRepository(Artist::class)->findAll();
+        }
 
         return $this->render('artist/artist.html.twig', [
             'artists' => $artist,
@@ -124,4 +130,6 @@ class ArtistController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 }
