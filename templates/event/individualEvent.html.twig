@@ -5,7 +5,20 @@
 
     <strong>ID :</strong> {{ event.id }}<br>
     <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
-    <strong>Artiste :</strong> {{ event.artist }}<br>
+
+    {% if event.artist is not null %}
+        <strong>Artiste :</strong> <a href="{{ path('app_show_artist' , {id:event.artist.id}) }}">{{ event.artist.name }}</a><br>
+    {% else %}
+        <strong>Artiste :</strong> Pas encore d'artiste<br>
+    {% endif %}
+
+    {% if app.user in event.users %}
+        <a href="{{ path('app_unsubscribe_event', {id: event.id}) }}">Unregister</a>
+    {% else %}
+        <a href="{{ path('app_subscribe_event', {id: event.id}) }}">Register</a>
+    {% endif %}
+    <br>
+
     <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
     <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
 

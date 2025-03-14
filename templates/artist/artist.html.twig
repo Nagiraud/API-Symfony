@@ -2,6 +2,17 @@
 
 
 {% block body %}
+    <p>Pas dans la liste ?</p>
+    <p>Ajoutez le !</p>
+    <a href="{{ path('app_create_artist') }}">Ajoutez un artiste</a>
+
+    <p>cherchez un artiste :</p>
+
+    <form method="GET" action="{{ path('app_artist') }}">
+        <input type="text" name="search" placeholder="nom" value="{{ app.request.get('search') }}">
+        <button type="submit">Search</button>
+    </form>
+
     <h1>Liste des artistes</h1>
     <ul>
         {% for artist in artists %}

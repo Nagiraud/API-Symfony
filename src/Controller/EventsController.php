@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Artist;
 use App\Entity\Event;
 use App\Form\EventFormType;
 use App\Form\ModifyEventFormType;
@@ -16,10 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventsController extends AbstractController
 {
     #[Route('/event', name: 'app_event')]
-    public function events(EntityManagerInterface $entityManager): Response
+    public function events(Request $request,EntityManagerInterface $entityManager): Response
     {
-        $repository = $entityManager->getRepository(Event::class);
-        $event = $repository->findAll();
+
+        $startDate = $request->query->get('start_date');
+        $endDate = $request->query->get('end_date');
+
+        if ($startDate && $endDate) {
+            $event = $entityManager->getRepository(Event::class)->findByDateRange(new \DateTime($startDate), new \DateTime($endDate));
+        } else {
+            $event = $entityManager->getRepository(Event::class)->findAll();
+        }
 
         return $this->render('event/event.html.twig', [
             'events' => $event,
@@ -85,5 +93,35 @@ class EventsController extends AbstractController
         return $this->render('event/individualEvent.html.twig', [
             'event' => $event,
         ]);
+    }
+
+    #[Route('/event/{id}/subscribe', name: 'app_subscribe_event')]
+    public function register(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez étre connecté.');
+        }
+
+        $event->addUser($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_show_event', ['id' => $event->getId()]);
+    }
+
+    #[Route('/event/{id}/unsubscribe', name: 'app_unsubscribe_event')]
+    public function unregister(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez étre connecté.');
+        }
+
+        $event->removeUser($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_show_event', ['id' => $event->getId()]);
     }
 }

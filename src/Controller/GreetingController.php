@@ -15,8 +15,17 @@ class GreetingController extends AbstractController
     #[Route('/hello', name: 'app_hello')]
     public function hello(): Response
     {
+        $user = $this->getUser();
+
+        if ($user) {
+            $events = $user->getEvents();
+        } else {
+            $events = [];
+        }
+
         return $this->render('greeting/hello.html.twig',[
-            "name"=> $this->getUser() ? $this->getUser()->getUserIdentifier() : "user"
+            "name"=> $this->getUser() ? $this->getUser()->getUserIdentifier() : "user",
+            "events" => $events,
         ]);
     }
 

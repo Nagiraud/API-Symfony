@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
@@ -12,16 +14,23 @@ class Artist
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['artist'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['artist'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['artist'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 1024, nullable: true)]
+    #[Groups(['artist'])]
     private ?string $image = null;
+
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'artist')]
+    private Collection $events;
 
     public function getId(): ?int
     {
@@ -60,6 +69,34 @@ class Artist
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    //lien vers les event auxquelle participe l'artiste
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getArtist() === $this) {
+                $event->setArtist(null);
+            }
+        }
 
         return $this;
     }

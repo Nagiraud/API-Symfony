@@ -18,32 +18,21 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ArtistController extends AbstractController
 {
     #[Route('/artist', name: 'app_artist')]
-    public function movies(EntityManagerInterface $entityManager): Response
+    public function movies(Request $request,EntityManagerInterface $entityManager ): Response
     {
-        $repository = $entityManager->getRepository(Artist::class);
-        $artist = $repository->findAll();
+
+        $search = $request->query->get('search');
+
+        if ($search) {
+            $artist = $entityManager->getRepository(Artist::class)->findByName($search);
+        } else {
+            $artist = $entityManager->getRepository(Artist::class)->findAll();
+        }
 
         return $this->render('artist/artist.html.twig', [
             'artists' => $artist,
         ]);
     }
-
-
-    /*#[Route('/artist/create', name: 'app_create_artist')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $contact = new Artist();
-        $form = $this->createForm(type: ArtistFormType::class, data: $contact);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_artist');
-        }
-        return $this->render('artist/create.html.twig', [
-            'form' => $form,
-        ]);
-    }*/
 
     #[Route('/artist/{{id}}/delete', name: 'app_delete_artist')]
     public function delete(Request $request, EntityManagerInterface $entityManager, int $id): Response
@@ -57,7 +46,7 @@ class ArtistController extends AbstractController
     }
 
     #[Route('/artist/{{id}}/modify', name: 'app_modify_artist')]
-    public function modify(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function modify(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger,int $id): Response
     {
 
         $artists = $entityManager->getRepository(Artist::class)->find($id);
@@ -66,9 +55,22 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Mettre à jour l'artiste en base de données
-            $entityManager->persist($artists);
+            $file = $form->get('image')->getData();
 
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $newFilename
+                );
+
+                $artists->setImage($newFilename);
+            }
+
+            $entityManager->persist($artists);
             $entityManager->flush();
 
             // Rediriger vers la liste des artistes après la modification
@@ -93,8 +95,8 @@ class ArtistController extends AbstractController
     }
 
 
-    #[Route("/artist/new", name:"artist_new")]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    #[Route("/artist/create", name:"app_create_artist")]
+    public function Create(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $artist = new Artist();
         $form = $this->createForm(ArtistFormType::class, $artist);
@@ -109,14 +111,11 @@ class ArtistController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
-                try {
-                    $file->move(
-                        $this->getParameter('image_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // Handle exception if something happens during file uploads
-                }
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $newFilename
+                );
+                
 
                 $artist->setImage($newFilename);
             }
@@ -131,4 +130,6 @@ class ArtistController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 }
