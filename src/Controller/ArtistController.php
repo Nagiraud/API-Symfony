@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Entity\Artist;
 use App\Form\ArtistFormType;
 use App\Form\ModifyArtistFormType;
