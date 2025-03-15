@@ -37,13 +37,15 @@ security:
     access_control:
         #Not connected
         - { path: ^/hello , roles: PUBLIC_ACCESS}
+        - { path: ^/api/ , roles: PUBLIC_ACCESS}
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
         #admin restricted path
         - { path: ^/artist/new, roles: ROLE_ADMIN }
         - { path: ^/artist/\d+/modify, roles: ROLE_ADMIN}
         - { path: ^/artist/\d+/delete, roles: ROLE_ADMIN}
         - { path: ^/user, roles: ROLE_ADMIN}
-        - { path: ^/login, roles: PUBLIC_ACCESS }
-        - { path: ^/register, roles: PUBLIC_ACCESS }
+
         #all user restricted path
         - { path: ^/, roles: ROLE_USER }
 

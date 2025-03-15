@@ -14,22 +14,23 @@ class Artist
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['artist'])]
+    #[Groups(['artist','event'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['artist'])]
+    #[Groups(['artist','event'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['artist'])]
+    #[Groups(['artist','event'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 1024, nullable: true)]
-    #[Groups(['artist'])]
+
     private ?string $image = null;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'artist')]
+    #[Groups(['artist'])]
     private Collection $events;
 
     public function getId(): ?int
