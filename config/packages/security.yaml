@@ -36,14 +36,16 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         #Not connected
-        { path: ^/hello , roles:}
+        - { path: ^/hello , roles: PUBLIC_ACCESS}
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS}
         #admin restricted path
-        { path: ^/artist/new, roles: ROLE_ADMIN }
-        { path: ^/artist/{{id}}/modify, roles: ROLE_ADMIN}
-        { path: ^/artist/{{id}}/delete, roles: ROLE_ADMIN}
-        { path: ^/user, roles: ROLE_ADMIN}
+        - { path: ^/artist/new, roles: ROLE_ADMIN }
+        - { path: ^/artist/*/modify, roles: ROLE_ADMIN}
+        - { path: ^/artist/*/delete, roles: ROLE_ADMIN}
+        - { path: ^/user, roles: ROLE_ADMIN}
         #all user restricted path
-        { path: ^/, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_USER }
 
 
 when@test:
