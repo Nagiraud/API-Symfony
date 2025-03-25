@@ -26,7 +26,7 @@ class Artist
     private ?string $description = null;
 
     #[ORM\Column(length: 1024, nullable: true)]
-
+    #[Groups(['artist','event'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'artist')]
