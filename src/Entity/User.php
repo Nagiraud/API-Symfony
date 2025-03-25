@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
@@ -36,6 +37,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'users')]
     private Collection $events;
+
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'creator')]
+    #[Groups(['event'])]
+    private Collection $createdEvents;
 
     public function getId(): ?int
     {
@@ -72,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        
+
         if(!in_array('ROLE_USER', $roles))
         {
             $roles[] = 'ROLE_USER';
@@ -100,6 +105,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCreatedEvent(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setCreatedEvent(string $password): static
     {
         $this->password = $password;
 
@@ -136,6 +153,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->events->removeElement($event)) {
             $event->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    //Créateur de l'évenement
+    public function getCreatedEvents(): Collection
+    {
+        return $this->createdEvents;
+    }
+
+    public function addCreatedEvent(Event $event): static
+    {
+        if (!$this->createdEvents->contains($event)) {
+            $this->createdEvents->add($event);
+            $event->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedEvent(Event $event): static
+    {
+        if ($this->createdEvents->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getCreator() === $this) {
+                $event->setCreator(null);
+            }
         }
 
         return $this;

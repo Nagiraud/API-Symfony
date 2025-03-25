@@ -41,6 +41,7 @@ class EventsController extends AbstractController
         $form = $this->createForm(type: EventFormType::class, data: $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $event->setCreator($this->getUser());
             $entityManager->persist($event);
             $entityManager->flush();
             return $this->redirectToRoute('app_event');

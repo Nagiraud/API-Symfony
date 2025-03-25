@@ -33,8 +33,12 @@ class Event
 
     //reférence les utilisateurs qui ont ajouté l'évent
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
-
     private Collection $users;
+
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'createdEvents')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $creator = null;
 
     public function getId(): ?int
     {
@@ -95,5 +99,17 @@ class Event
         $this->users->removeElement($user);
         return $this;
 
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): static
+    {
+        $this->creator = $creator;
+
+        return $this;
     }
 }
