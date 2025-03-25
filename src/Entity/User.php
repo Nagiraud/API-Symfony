@@ -20,6 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['event'])]
     #[ORM\Column(length: 180)]
     private ?string $username = null;
 
@@ -35,11 +36,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'Follower')]
     private Collection $events;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'creator')]
-    #[Groups(['event'])]
     private Collection $createdEvents;
 
     public function getId(): ?int
