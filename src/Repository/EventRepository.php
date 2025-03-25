@@ -40,4 +40,13 @@ class EventRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findByDateRange(\DateTime $startDate, \DateTime $endDate): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.date BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
 }

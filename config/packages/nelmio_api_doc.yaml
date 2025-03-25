@@ -1,0 +1,9 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: "Artiste API"
+      description: "Documentation de l'API Symfony, permettant de récupérer les artiste, et les événement musicaux"
+      version: "1.0.0"
+  areas: # Définit les zones où Swagger sera disponible
+    path_patterns:
+      - ^/api # S'applique aux routes qui commencent par "/api"
