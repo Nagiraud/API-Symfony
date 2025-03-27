@@ -83,7 +83,7 @@ class Event
         return $this;
     }
 
-    public function getFollower(): Collection
+    public function getUser(): Collection
     {
         return $this->Follower;
     }
