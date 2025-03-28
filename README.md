@@ -43,5 +43,5 @@ Puis appliquons la migration :
 symfony console doctrine:migrations:migrate
 ```
 ## Crédit:
-créer par Nathan Giraud, Julien Demaiziére et Elyo Maamari
+créer par [Nathan Giraud]([https](https://github.com/Nagiraud), [Julien Demaiziére](https://github.com/julienlink) et [Elyo Maamari](https://github.com/Elyo17)
 
