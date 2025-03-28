@@ -4,9 +4,9 @@
 {% block body %}
 
     {% if is_granted("ROLE_ADMIN") %}
-        <p>Pas dans la liste ?</p>
-        <p>Ajoutez le !</p>
-        <a href="{{ path('app_create_artist') }}">Ajoutez un artiste</a>
+        <p>Vous ne le trouves pas dans la liste ?</p>
+        <p>Ajoutez le ! <a href="{{ path('app_create_artist') }}">Ajoutez un artiste</a></p>
+
     {% endif %}
 
     <p>cherchez un artiste :</p>
