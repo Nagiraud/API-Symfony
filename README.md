@@ -1,4 +1,14 @@
 # API-Symfony
+## Le projet :
+Ce projet est une API Symfony permettant de gérer une collection d'artistes et d'événements musicaux.
+Vous pouvez ajouter, modifier et supprimer des artistes ainsi que des événements.
+## Cloner le projet :
+Placez vous dans le dossier ou vous souhaitez mettre ce site
+```
+git clone https://github.com/Nagiraud/API-Symfony.git
+```
+ouvrez le dossier
+
 ## Installer les dépendances :
 ```
 composer install
@@ -32,3 +42,6 @@ Puis appliquons la migration :
 ```
 symfony console doctrine:migrations:migrate
 ```
+## Crédit:
+créer par Nathan Giraud, Julien Demaiziére et Elyo Maamari
+
