@@ -3,16 +3,16 @@
 {% block body %}
 
     <p>Pas dans la liste ?</p>
-    <p>Ajoutez le !</p>
-    <a href="{{ path('app_create_event') }}">Ajoutez un événement</a>
+    <p>Ajoutez le ! <a href="{{ path('app_create_event') }}">Ajoutez un événement</a></p>
 
-    <p>cherchez un évenement : :</p>
+
+    <p>cherchez un évenement : </p>
 
     <form method="GET" action="{{ path('app_event') }}">
         <input type="date" name="start_date" value="{{ app.request.get('start_date') }}">
         <input type="date" name="end_date" value="{{ app.request.get('end_date') }}">
         <button type="submit">Submit</button>
-    </form>
+    </form><br>
 
     <h1>Liste des événements</h1>
 
@@ -20,8 +20,9 @@
         {% for event in events %}
             <li>
                 <strong>Nom :</strong><a href="{{ path('app_show_event', {id: event.id}) }}" > {{ event.name }} </a><br>
-                {% if app.user.id == event.creator_id  %}
+                {% if app.user.id == event.creator.id  %}
                         <a href="{{ path('app_modify_event', { id: event.id }) }}">modifier</a>
+                        <a href="{{ path('app_delete_event', { id: event.id }) }}">supprimer</a>
                 {% endif %}
             </li>
             <hr>

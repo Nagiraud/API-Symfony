@@ -68,7 +68,7 @@ class EventsController extends AbstractController
     {
         $events = $entityManager->getRepository(Event::class)->find($id);
         //safety si un utilisateur essaie de passer par l'url avec une id random
-        if ($this->getUser()->getId() !== $events->getCreatorId()) {
+        if ($this->getUser()->getId() !== $events->getCreator()->getId()) {
             return $this->redirectToRoute('app_event');
         }
         $form = $this->createForm( ModifyEventFormType::class, $events);

@@ -2,6 +2,7 @@
 
 
 {% block body %}
+
     {% if is_granted("ROLE_ADMIN") %}
         <p>Pas dans la liste ?</p>
         <p>Ajoutez le !</p>
@@ -13,7 +14,7 @@
     <form method="GET" action="{{ path('app_artist') }}">
         <input type="text" name="search" placeholder="nom" value="{{ app.request.get('search') }}">
         <button type="submit">Search</button>
-    </form>
+    </form><br>
 
     <h1>Liste des artistes</h1>
     <ul>
