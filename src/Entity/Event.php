@@ -32,9 +32,15 @@ class Event
     private ?Artist $artist = null;
 
     //reférence les utilisateurs qui ont ajouté l'évent
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
 
-    private Collection $users;
+    #[Groups(['event'])]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
+    private Collection $Follower;
+
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'createdEvents')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $creator = null;
 
     public function getId(): ?int
     {
@@ -77,23 +83,35 @@ class Event
         return $this;
     }
 
-    public function getUsers(): Collection
+    public function getFollower(): Collection
     {
-        return $this->users;
+        return $this->Follower;
     }
 
     public function addUser(User $user): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
+        if (!$this->Follower->contains($user)) {
+            $this->Follower->add($user);
         }
 
         return $this;
     }
 
     public function removeUser(User $user): static{
-        $this->users->removeElement($user);
+        $this->Follower->removeElement($user);
         return $this;
 
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): static
+    {
+        $this->creator = $creator;
+
+        return $this;
     }
 }

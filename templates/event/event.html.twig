@@ -20,6 +20,10 @@
         {% for event in events %}
             <li>
                 <strong>Nom :</strong><a href="{{ path('app_show_event', {id: event.id}) }}" > {{ event.name }} </a><br>
+                {% if app.user  %}
+                    {# TODO rajouter l'id de l'utilisateur qui créé l'event #}
+                        <a href="{{ path('app_event') }}"
+                {% endif %}
             </li>
             <hr>
         {% endfor %}
