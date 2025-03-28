@@ -42,6 +42,8 @@ Puis appliquons la migration :
 ```
 symfony console doctrine:migrations:migrate
 ```
+## Lancez le site :
+vous pouvez accédez au site avec ce lien : [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ## Crédit:
 créer par [Nathan Giraud](https://github.com/Nagiraud), [Julien Demaiziere](https://github.com/julienlink) et [Elyo Maamari](https://github.com/Elyo17)
 
