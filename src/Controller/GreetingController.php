@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class GreetingController extends AbstractController
 {
-    #[Route('/hello', name: 'app_hello')]
+    #[Route('/', name: 'app_hello')]
     public function hello(): Response
     {
         $user = $this->getUser();

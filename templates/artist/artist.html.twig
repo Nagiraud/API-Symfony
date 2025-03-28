@@ -2,6 +2,7 @@
 
 
 {% block body %}
+
     {% if is_granted("ROLE_ADMIN") %}
         <p>Pas dans la liste ?</p>
         <p>Ajoutez le !</p>
