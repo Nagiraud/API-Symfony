@@ -3,7 +3,8 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div id="registration">
+        <h1>Register</h1></br>
 
     {{ form_errors(registrationForm) }}
 
@@ -16,4 +17,17 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
+
+
+    <style>
+        #registration{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction:column;
+            max-width: 500px;
+        }
+    </style>
 {% endblock %}
+

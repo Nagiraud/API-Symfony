@@ -3,16 +3,16 @@
 {% block body %}
     <h1>Artiste : {{ artist.name }}</h1>
 
-    <strong>ID :</strong> {{ artist.id }}<br>
-    <strong>Description :</strong> {{ artist.description }}<br>
+    <p><strong>ID :</strong> {{ artist.id }}</p><br>
+    <p><strong>Description :</strong> {{ artist.description }}</p><br>
 
     {% if artist.image %}
         <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
     {% endif %}<br>
 
 
-    <a href="{{ path('app_delete_artist', {id: artist.id}) }}">Supprimer</a>
-    <a href="{{ path('app_modify_artist', {id: artist.id}) }}">Modifier</a>
+    <button class="button_remove" onclick="window.location.href='{{ path('app_delete_artist', {id: artist.id}) }}'">Supprimer</button>
+    <button class="button_modify" onclick="window.location.href='{{ path('app_modify_artist', {id: artist.id}) }}'">Modifier</button>
 
     </ul>
 {% endblock %}

@@ -3,23 +3,23 @@
 {% block body %}
     <h1>évenement : {{ event.name }}</h1>
 
-    <strong>ID :</strong> {{ event.id }}<br>
-    <strong>Date :</strong> {{ event.date|date('Y-m-d')}}<br>
+    <p><strong>ID :</strong> {{ event.id }}</p><br>
+<p><strong>Date :</strong> {{ event.date|date('Y-m-d')}}</p><br>
 
     {% if event.artist is not null %}
-        <strong>Artiste :</strong> <a href="{{ path('app_show_artist' , {id:event.artist.id}) }}">{{ event.artist.name }}</a><br>
+        <p><strong>Artiste :</strong> <a href="{{ path('app_show_artist' , {id:event.artist.id}) }}">{{ event.artist.name }}</a></p><br>
     {% else %}
         <strong>Artiste :</strong> Pas encore d'artiste<br>
     {% endif %}
 
     {% if app.user in event.follower %}
-        <a href="{{ path('app_unsubscribe_event', {id: event.id}) }}">S'abboner</a>
+        <a href="{{ path('app_unsubscribe_event', {id: event.id}) }}">Se désabonner</a>
     {% else %}
-        <a href="{{ path('app_subscribe_event', {id: event.id}) }}">Se désabonner</a>
+        <a href="{{ path('app_subscribe_event', {id: event.id}) }}">S'abonner</a>
     {% endif %}
     <br>
 
-    <a href="{{ path('app_delete_event', {id: event.id}) }}">Supprimer</a>
-    <a href="{{ path('app_modify_event', {id: event.id}) }}">Modifier</a>
+    <button class="button_remove" onclick="window.location.href='{{ path('app_delete_event', {id: event.id}) }}'">Supprimer</button>
+    <button class="button_modify" onclick="window.location.href='{{ path('app_modify_event', {id: event.id}) }}'">Modifier</button>
 
 {% endblock %}
