@@ -1,10 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    <h1>Ajoutez un événement</h1>
     {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.date) }}
-    {{ form_row(form.artist) }}
+    {{ form_row(form.name,{
+        label:'Nom'
+    }) }}
+    {{ form_row(form.date,{
+        label:'Date'
+    }) }}
+    {{ form_row(form.artist,{
+        label:'Artiste'
+    }) }}
     <button type="submit">Ajouter un événement</button>
     {{ form_end(form) }}
 {% endblock %}

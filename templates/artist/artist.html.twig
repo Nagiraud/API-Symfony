@@ -3,13 +3,7 @@
 
 {% block body %}
 
-    {% if is_granted("ROLE_ADMIN") %}
-        <p>Vous ne le trouves pas dans la liste ?</p>
-        <p>Ajoutez le ! <a href="{{ path('app_create_artist') }}">Ajoutez un artiste</a></p>
-
-    {% endif %}
-
-    <p>cherchez un artiste :</p>
+    <p> Cherchez un artiste : </p>
 
     <form method="GET" action="{{ path('app_artist') }}">
         <input type="text" name="search" placeholder="nom" value="{{ app.request.get('search') }}">
@@ -17,10 +11,20 @@
     </form><br>
 
     <h1>Liste des artistes</h1>
-    <ul>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="artist_add">
+            <p>Ajoutez un artiste <a href="{{ path('app_create_artist') }}" ><img id="artist_img_add" src="{{ asset('images/plus.png') }}" alt="add artist"></a><br></p>
+        </div>
+    {% endif %}
+
+    <ul class="artist_list">
         {% for artist in artists %}
 
-            <li><a href="{{ path('app_show_artist', {id: artist.id}) }}">{{ artist.name }}</a></li>
+            <li class="artist_item">
+                <img class="artist_icon" src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}"> {# Image de l'artiste #}
+                <a class="artist_link" href="{{ path('app_show_artist', {id: artist.id}) }}">{{ artist.name }}</a>
+            </li>
 
         {% endfor %}
     </ul>

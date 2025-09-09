@@ -2,30 +2,28 @@
 
 {% block body %}
 
-    <p>Pas dans la liste ?</p>
-    <p>Ajoutez le ! <a href="{{ path('app_create_event') }}">Ajoutez un événement</a></p>
 
 
-    <p>cherchez un évenement : </p>
+    <p>Cherchez un évenement : </p>
 
-    <form method="GET" action="{{ path('app_event') }}">
+    <form method="GET" action="{{ path('app_event') }}" class="event_form">
+        <p>Du :</p>
         <input type="date" name="start_date" value="{{ app.request.get('start_date') }}">
+        <p> Au:</p>
         <input type="date" name="end_date" value="{{ app.request.get('end_date') }}">
         <button type="submit">Submit</button>
     </form><br>
 
     <h1>Liste des événements</h1>
+    <p>Ajoutez un événement <a href="{{ path('app_create_event') }}" ><img id="event_img_add" src="{{ asset('images/plus.png') }}" alt="add event"></a></p>
 
-    <ul>
+
+    <ul class="event_list">
         {% for event in events %}
-            <li>
-                <strong>Nom :</strong><a href="{{ path('app_show_event', {id: event.id}) }}" > {{ event.name }} </a><br>
-                {% if app.user.id == event.creator.id  %}
-                        <a href="{{ path('app_modify_event', { id: event.id }) }}">modifier</a>
-                        <a href="{{ path('app_delete_event', { id: event.id }) }}">supprimer</a>
-                {% endif %}
+            <li class="event_item">
+                <a class="event_link" href="{{ path('app_show_event', {id: event.id}) }}" >{{ event.name }} </a><br>
             </li>
-            <hr>
+
         {% endfor %}
     </ul>
 {% endblock %}

@@ -19,7 +19,8 @@
     {% endif %}
     <br>
 
-    <button class="button_remove" onclick="window.location.href='{{ path('app_delete_event', {id: event.id}) }}'">Supprimer</button>
-    <button class="button_modify" onclick="window.location.href='{{ path('app_modify_event', {id: event.id}) }}'">Modifier</button>
-
+    {% if app.user.id == event.creator.id  %}
+        <button class="button_remove" onclick="window.location.href='{{ path('app_delete_event', {id: event.id}) }}'">Supprimer</button>
+        <button class="button_modify" onclick="window.location.href='{{ path('app_modify_event', {id: event.id}) }}'">Modifier</button>
+    {% endif %}
 {% endblock %}

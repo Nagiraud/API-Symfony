@@ -2,9 +2,15 @@
 
 {% block body %}
     {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.image) }}
+        {{ form_row(form.name,{
+            label:'Nom'
+        }) }}
+        {{ form_row(form.description,{
+            label:'Description'
+        }) }}
+        {{ form_row(form.image,{
+            label:'Image'
+        }) }}
        <button class="btn">Modifier artiste</button>
     {{ form_end(form) }}
 {% endblock %}
