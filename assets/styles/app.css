@@ -50,6 +50,12 @@ header a:hover{
     color:#777;
 }
 
+#header_connection{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:30px;
+}
+
 nav {
     display: flex;
     justify-content: center;

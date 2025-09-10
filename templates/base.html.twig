@@ -27,14 +27,18 @@
                 {% endif %}
             {% endif %}
         </div>
-        <div>
+
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="/logout">Se déconnecter</a>
+            <div>
+                <a href="/logout">Se déconnecter</a>
+            </div>
         {% else %}
-            <a href="/login">Se connecter</a>
-            <a href="/register">S'enregistrer</a>
+            <div id="header_connection">
+                <a href="/login">Se connecter</a>
+                <a href="/register">S'enregistrer</a>
+            </div>
         {% endif %}
-        </div>
+
     </header></br>
     <div class="container">
 
