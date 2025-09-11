@@ -22,7 +22,11 @@
         {% for artist in artists %}
 
             <li class="artist_item">
+                {% if artist.image %}
                 <img class="artist_icon" src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}"> {# Image de l'artiste #}
+                {% else %}
+                    <div class="artist_icon">{{ artist.name|first }}</div>
+                {% endif %}
                 <a class="artist_link" href="{{ path('app_show_artist', {id: artist.id}) }}">{{ artist.name }}</a>
             </li>
 

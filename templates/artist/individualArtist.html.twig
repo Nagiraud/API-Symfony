@@ -1,18 +1,42 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Artiste : {{ artist.name }}</h1>
-
-    <p><strong>ID :</strong> {{ artist.id }}</p><br>
-    <p><strong>Description :</strong> {{ artist.description }}</p><br>
-
     {% if artist.image %}
-        <img src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
+        <img class="Individual_artist_image" src="{{ asset('uploads/images/' ~ artist.image) }}" alt="{{ artist.name }}">
     {% endif %}<br>
+    <h1>{{ artist.name }}</h1>
 
+    <p class="Individual_artist_id"><strong>ID :</strong> {{ artist.id }}</p><br>
 
-    <button class="button_remove" onclick="window.location.href='{{ path('app_delete_artist', {id: artist.id}) }}'">Supprimer</button>
-    <button class="button_modify" onclick="window.location.href='{{ path('app_modify_artist', {id: artist.id}) }}'">Modifier</button>
+    <div class="description_section">
+        <h2>Description</h2>
+        <div class="description_text">
+            <p> {{ artist.description }}</p><br>
+        </div>
+    </div>
 
-    </ul>
+    <div class="description_section">
+        <h2>Evenement</h2>
+        <div >
+            {% for event in artist.events %}
+                <a href="{{ path('app_show_event', {id: event.id}) }}"> {{ event.name }} </a><br>
+            {% endfor %}
+        </div>
+    </div>
+
+<div class="action_section">
+
+    {% if is_granted("ROLE_ADMIN") %}
+    <button class="button button_remove" onclick="window.location.href='{{ path('app_delete_artist', {id: artist.id}) }}'">
+        <i class="fas fa-trash-alt"></i> Supprimer
+    </button>
+    <button class="button button_modify" onclick="window.location.href='{{ path('app_modify_artist', {id: artist.id}) }}'">
+        <i class="fas fa-edit"></i> Modifier
+    </button>
+    {% endif %}
+
+    <button class="button button_back" onclick="window.location.href='{{ path('app_artist') }}'">
+        <i class="fas fa-arrow-left"></i> Retour à la liste
+    </button>
+<div>
 {% endblock %}

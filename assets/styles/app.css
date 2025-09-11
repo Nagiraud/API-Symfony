@@ -86,20 +86,31 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Boutons */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #007BFF;
+
+button {
+    padding: 10px;
+    background: #28a745;
     color: white;
-    text-decoration: none;
+    border: none;
     border-radius: 5px;
-    transition: background 0.3s;
+    cursor: pointer;
 }
 
-.button:hover {
-    background: #0056b3;
+
+
+.button_remove{
+    background-color:red;
+    margin-bottom: 5px;
 }
+
+.button_modify{
+    background-color:blue;
+}
+
+
+
 
 /* Tableaux */
 table {
@@ -135,27 +146,10 @@ input, textarea, select {
     border-radius: 5px;
 }
 
-button {
-    padding: 10px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-button:hover {
-    background: #218838;
-}
 
-.button_remove{
-    background-color:red;
-    margin-bottom: 5px;
-}
 
-.button_modify{
-    background-color:blue;
-}
+
 
 /* Footer */
 .footer {
