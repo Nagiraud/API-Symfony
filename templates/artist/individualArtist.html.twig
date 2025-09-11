@@ -27,15 +27,15 @@
 <div class="action_section">
 
     {% if is_granted("ROLE_ADMIN") %}
-    <button class="button button_remove" onclick="window.location.href='{{ path('app_delete_artist', {id: artist.id}) }}'">
+    <button class="button_remove" onclick="window.location.href='{{ path('app_delete_artist', {id: artist.id}) }}'">
         <i class="fas fa-trash-alt"></i> Supprimer
     </button>
-    <button class="button button_modify" onclick="window.location.href='{{ path('app_modify_artist', {id: artist.id}) }}'">
+    <button class="button_modify" onclick="window.location.href='{{ path('app_modify_artist', {id: artist.id}) }}'">
         <i class="fas fa-edit"></i> Modifier
     </button>
     {% endif %}
 
-    <button class="button button_back" onclick="window.location.href='{{ path('app_artist') }}'">
+    <button class="button_back" onclick="window.location.href='{{ path('app_artist') }}'">
         <i class="fas fa-arrow-left"></i> Retour à la liste
     </button>
 <div>
