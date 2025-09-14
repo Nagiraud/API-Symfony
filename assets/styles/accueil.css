@@ -1,0 +1,122 @@
+/* En-tête */
+.title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    padding: 30px;
+    color: black;
+    border-radius: 15px;
+}
+
+.title h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+.title p {
+    font-size: 1.2rem;
+}
+
+.home_section {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home_section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+/*Titre catégorie*/
+.section_title {
+    color: #2c3e50;
+    width: 400px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #28a745;
+    display: flex;
+    align-items: center;
+}
+
+.section_title i {
+    margin-right: 10px;
+}
+
+/*liste*/
+
+.section_list{
+    list-style: none;
+}
+.item {
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 4px solid #28a745;
+}
+
+.item:hover {
+    background-color: #e9f7fe;
+    transform: translateX(5px);
+}
+
+.item a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.item a:hover {
+    color: #28a745;
+}
+
+.item a i {
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+.item p {
+    margin: 0;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+}
+
+.item p i {
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+.empty_message {
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 15px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.not_connected_message {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #2d3436;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .section_title{
+        width: 100%;
+    }
+    .title h1 {
+        font-size: 2.5rem;
+    }
+}

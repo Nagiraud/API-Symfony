@@ -4,23 +4,69 @@
 
 {% block body %}
 
+    <div class="title">
+        <h1>BAND</h1>
+        <p>Votre plateforme culturelle pour les événements et artistes</p>
+    </div>
 
-    <h1>Vapeur</h1>
+    {# Evenement enregisté #}
+    <div class="home_section">
+        <h2 class="section_title">
+            <i>Mes événements enregistrés :</i>
+            <span class="count-badge">{{ eventsUser|length }}</span>
+        </h2>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p>Liste d'évenemnt enregisté :</p>
-         {% for event in events %}
-              <ul>
-                  <a href="{{ path('app_show_event', {id:event.id}) }}">{{ event.name }}</a>
-              </ul>
-         {% else %}
-             <li>Pas d'événement enregisté.</li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <ul class="section_list">
+             {% for eventUser in eventsUser %}
+                   <li class="item">
+                        <a href="{{ path('app_show_event', {id:eventUser.id}) }}">{{ eventUser.name }}</a>
+                   </li>
+             {% else %}
+                 <li class="empty_message">Pas d'événement enregisté.</li>
+             {% endfor %}
+            </ul>
+        {% else %}
 
-         {% endfor %}
-    {% else %}
-        <p>Connectez vous</p>
+            <div class="not_connected_message">
+                <p>Connectez-vous</p>
+            </div>
 
-    {% endif %}
+        {% endif %}
+    </div>
+
+    {# Liste des artistes #}
+    <div class="home_section">
+        <h2 class="section_title">
+            <i>Liste d'artistes :</i>
+            <span class="count-badge">{{ artists|length }}</span>
+        </h2>
+
+        <ul class="section_list">
+        {% for artist in artists %}
+                <li class="item"><a href="{{ path('app_show_artist', {id:artist.id}) }}">{{ artist.name}}</a></li>
+        {% else %}
+            <li class="empty_message">Pas d'artistes disponible</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    {# liste des événements #}
+    <div class="home_section">
+        <h2 class="section_title">
+            <i>Liste d'évenement :</i>
+            <span class="count-badge">{{ events|length }}</span>
+        </h2>
+        <ul class="section_list">
+        {% for event in events%}
+
+            <li class="item"><a href="{{ path('app_show_event', {id:event.id}) }}">{{ event.name}}</a></li>
+
+        {% else %}
+            <li class="empty_message">Pas d'événement disponible</li>
+        {% endfor %}
+        </ul>
+    </div>
 
 
 

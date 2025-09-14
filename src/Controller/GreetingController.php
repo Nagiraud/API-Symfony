@@ -7,41 +7,31 @@ use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class GreetingController extends AbstractController
 {
     #[Route('/', name: 'app_hello')]
-    public function hello(): Response
+    public function hello(EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
 
+        $event = $entityManager->getRepository(Event::class)->findAll();
+        $artist = $entityManager->getRepository(Artist::class)->findAll();
+
+        $user = $this->getUser();
         if ($user) {
-            $events = $user->getEvents();
+            $eventsUser = $user->getEvents();
         } else {
-            $events = [];
+            $eventsUser = [];
         }
 
         return $this->render('greeting/hello.html.twig',[
             "name"=> $this->getUser() ? $this->getUser()->getUserIdentifier() : "user",
-            "events" => $events,
+            "eventsUser" => $eventsUser,
+            "events" => $event,
+            "artists" => $artist,
         ]);
-    }
-
-    
-    #[Route('/api/artist', name: 'api_artist', methods: ['GET'])]
-    public function getProducts(EntityManagerInterface $entityManager): JsonResponse
-    {
-        $repository = $entityManager->getRepository(Artist::class);
-        $movie = $repository->findAll();
-
-        $data = array_map(fn($movie) => [
-            'id' => $movie->getId(),
-            'name' => $movie->getName(),
-            'description' => $movie->getDescription(),
-        ], $movie);
-
-        return $this->json($data);
     }
 }

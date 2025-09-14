@@ -71,3 +71,99 @@
         grid-template-columns: 1fr;
     }
 }
+
+/*Individual artist*/
+
+.Individual_artist_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+.Individual_artist_id{
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.description_section{
+    margin-bottom: 30px;
+}
+
+.description_section h2{
+    color: #2c3e50;
+    font-size: 1.8rem;
+    width: 600px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #7f8c8d;
+    display: inline-block;
+}
+
+.description_text{
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #34495e;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+/* Bouton */
+
+.action_section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eaeaea;
+}
+
+
+
+.button_remove {
+    background: #e74c3c;
+    color: white;
+}
+
+.button_modify {
+    background: #3498db;
+    color: white;
+}
+
+.button_back {
+    background:#7f8c8d;
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button i {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .Individual_artist_image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .description_section {
+        width: 80%;
+    }
+    .description_section h2 {
+        width: 80%;
+    }
+
+    .actions-section {
+        flex-direction: column;
+    }
+}

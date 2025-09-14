@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ asset('styles/accueil.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/artist.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/event.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/header.css') }}">
 {#  {% block stylesheets %}
         {% endblock %}#}
 
@@ -17,6 +18,14 @@
     </head>
     <body>
     <header>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
         <div id="header-category">
             <a href="{{ path('app_hello') }}">Accueil</a>
             <a href="{{ path('app_artist') }}">Artistes</a>
@@ -29,7 +38,7 @@
         </div>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div>
+            <div id="header_connection">
                 <a href="/logout">Se déconnecter</a>
             </div>
         {% else %}
@@ -38,6 +47,8 @@
                 <a href="/register">S'enregistrer</a>
             </div>
         {% endif %}
+
+
 
     </header></br>
     <div class="container">

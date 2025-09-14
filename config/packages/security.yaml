@@ -35,22 +35,22 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        #Not connected
-        - { path: ^/hello , roles: PUBLIC_ACCESS}
 
-        - { path: ^/api/ , roles: PUBLIC_ACCESS}
-        - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/login, roles: PUBLIC_ACCESS}
         #admin restricted path
         - { path: ^/artist/new, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_ADMIN}
         - { path: ^/artist/\d+/modify, roles: ROLE_ADMIN}
         - { path: ^/artist/\d+/delete, roles: ROLE_ADMIN}
 
-
-
         #all user restricted path
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/artist, roles: ROLE_USER }
+        - { path: ^/event, roles: ROLE_USER }
+
+        #Not connected
+        - { path: ^/api/ , roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/ , roles: PUBLIC_ACCESS }
 
 
 when@test:
