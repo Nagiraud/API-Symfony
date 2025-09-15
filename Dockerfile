@@ -2,9 +2,8 @@ FROM ubuntu:latest
 LABEL authors="natha"
 
 # Installer dépendances système
-RUN apt-get update && apt-get install -y \
-    git unzip libicu-dev libpq-dev libzip-dev \
-    && docker-php-ext-install intl pdo pdo_pgsql zip opcache
+RUN apt-get update && apt-get install -y
+RUN docker-php-ext-install intl pdo pdo_pgsql zip opcache
 
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
