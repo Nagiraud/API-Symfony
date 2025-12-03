@@ -24,7 +24,8 @@ jobs:
       - name: test d'intégration
         run: php bin/phpunit tests/integration/UserRepositoryTest.php
       - name: test fonctionnel
-        run: php bin/phpunit tests/fonctionel
+        run: php bin/phpunit tests/fonctionel/ControllerTest.php
+
 
 
 
