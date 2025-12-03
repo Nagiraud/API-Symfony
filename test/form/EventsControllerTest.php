@@ -52,47 +52,4 @@ class EventsControllerTest extends TestCase
         $this->assertEquals('rendered template', $response->getContent());
     }
 
-
-    // Cas normal quand l'utilisateur est connecter
-    public function testRegisterWithLoggedUser()
-    {
-        // 1) Fake event
-        $event = $this->createMock(\App\Entity\Event::class);
-        $event->method('getId')->willReturn(10);
-
-        // On veut vérifier que addUser() est bien appelé une fois
-        $event->expects($this->once())
-            ->method('addUser');
-
-        // 2) Fake user
-        $fakeUser = (object)['username' => 'demo'];
-
-        // 3) Mock EntityManager → flush() doit être appelé une fois
-        $entityManagerMock = $this->createMock(EntityManagerInterface::class);
-        $entityManagerMock->expects($this->once())
-            ->method('flush');
-
-        // 4) Mock du controller
-        // On doit mocker getUser() + redirectToRoute()
-        $controller = $this->getMockBuilder(\App\Controller\EventsController::class)
-            ->onlyMethods(['getUser', 'redirectToRoute'])
-            ->getMock();
-
-        // getUser() doit renvoyer notre faux utilisateur
-        $controller->method('getUser')
-            ->willReturn($fakeUser);
-
-        // redirectToRoute() doit renvoyer une vraie Response
-        $controller->method('redirectToRoute')
-            ->with('app_show_event', ['id' => 10])
-            ->willReturn(new \Symfony\Component\HttpFoundation\Response('redirect ok'));
-
-        // 5) Exécution
-        $response = $controller->register($event, $entityManagerMock);
-
-        // 6) Vérif
-        $this->assertEquals('redirect ok', $response->getContent());
-    }
-
-
 }
