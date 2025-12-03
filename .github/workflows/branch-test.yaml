@@ -1,9 +1,9 @@
 name: Branch-specifics Tests
 on:
   pull_request:
-    branches: [main,test-de-code,test-Nathan]
+    branches: [main,master,test-de-code]
   push:
-    branches: [main,test-de-code,test-Nathan]
+    branches: [main,master,test-de-code]
 
 jobs:
   pr_tests:
