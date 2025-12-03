@@ -6,10 +6,14 @@ use App\Entity\Artist;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+
+
 class ControllerTest extends WebTestCase
 {
+
+
     //Greetings controller (root)
-    function rootAccessTest()
+    function testRootAccess() : void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
@@ -20,14 +24,13 @@ class ControllerTest extends WebTestCase
 
     //Artist controller
 
-    function artistCreationTest()
+    function testArtistCreation() : void
     {
         $client = static::createClient();
         $admin = new User();
         $admin->setUsername('admin');
         $admin->setPassword('admin');
         $admin->setRoles(['ROLE_ADMIN']);
-
         $client->loginUser($admin);
 
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -49,7 +52,7 @@ class ControllerTest extends WebTestCase
         $this->assertNotNull($artist);
     }
 
-    function getArtistTest(): void
+    function testGetArtist(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/artist');
