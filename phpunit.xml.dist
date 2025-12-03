@@ -18,9 +18,15 @@
     </php>
 
     <testsuites>
+
+        <testsuite name="Integration">
+            <directory>tests/form</directory>
+        </testsuite>
+
         <testsuite name="Integration">
             <directory>tests/integration</directory>
         </testsuite>
+
     </testsuites>
 
 </phpunit>
