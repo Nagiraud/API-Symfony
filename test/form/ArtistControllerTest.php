@@ -81,9 +81,6 @@ class ArtistControllerTest extends TestCase
         // 7) Vérification
         $this->assertEquals('rendered template', $response->getContent());
     }
-
-
-
 }
 
 
