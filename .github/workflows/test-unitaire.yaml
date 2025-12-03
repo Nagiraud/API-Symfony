@@ -1,4 +1,4 @@
-name: Branch-specifics Tests
+ame: Branch-specifics Tests
 on:
   pull_request:
     branches: [main,test-de-code]

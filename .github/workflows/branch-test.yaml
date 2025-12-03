@@ -18,7 +18,7 @@ jobs:
       - name: test d'unitaire Artist
         run: php bin/phpunit tests/form/ArtistControllerTest.php
       - name: test d'intégration
-        run: php bin/phpunit tests/Integration/UserRepositoryTest.php
+        run: php bin/phpunit tests/integration/UserRepositoryTest.php
 
 
 
