@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\fonctionnel;
 
 use App\Entity\Artist;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 
 
 class ControllerTest extends WebTestCase
