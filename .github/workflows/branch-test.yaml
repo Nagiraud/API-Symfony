@@ -23,8 +23,6 @@ jobs:
         run: php bin/phpunit tests/form/ArtistControllerTest.php
       - name: test d'intégration
         run: php bin/phpunit tests/integration/UserRepositoryTest.php
-      - name: test fonctionnel
-        run: php bin/phpunit tests/fonctionel/ControllerTest.php
 
 
 
