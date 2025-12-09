@@ -1,5 +1,10 @@
 
 services:
+  app: 
+    build: 
+      context: contextPath
+      dockerfile: Dockerfile
+
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
