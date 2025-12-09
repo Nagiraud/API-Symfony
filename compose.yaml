@@ -4,7 +4,8 @@ services:
     build: 
       context: contextPath
       dockerfile: Dockerfile
-
+      secrets:
+        - db_password
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
