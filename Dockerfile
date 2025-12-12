@@ -1,5 +1,5 @@
 FROM php:8.2-fpm-alpine
-WORKDIR /
+WORKDIR /app
 RUN apk add --no-cache \
     git \
     unzip \
@@ -10,15 +10,17 @@ RUN apk add --no-cache \
     curl \
     bash \
     nodejs \
-    npm
+    npm \
+    postgresql-dev \
+    postgresql-client \
+    && docker-php-ext-install pdo pdo_pgsql intl zip opcache
 RUN docker-php-ext-install pdo pdo_mysql intl zip opcache
 COPY --from=composer:2.9.2 /usr/bin/composer /usr/bin/composer
 COPY . .
 RUN composer install
-RUN symfony console doctrine:database:create
-RUN symfony console make:migration
-RUN symfony console doctrine:migrations:migrate
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 RUN php bin/console asset-map:compile
 EXPOSE 8000
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+ENTRYPOINT ["/entrypoint.sh"]
 
